@@ -10,3 +10,11 @@ const initialState = {
         status: 'loading',
     }
 };
+
+const postsSlice = createSlice({
+    name: 'posts',
+    initialState,
+    reducer: {},
+})
+
+export const postsReducer = postsSlice.reducer
