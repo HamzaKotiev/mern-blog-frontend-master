@@ -21,6 +21,11 @@ const postsSlice = createSlice({
     name: 'posts',
     initialState,
     reducer: {},
+    extraReducers: {
+        [fatchPosts.pending]: (state) => {
+            state.posts.state = 'loading'
+        }
+    }
 })
 
 export const postsReducer = postsSlice.reducer
