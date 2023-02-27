@@ -24,7 +24,15 @@ const postsSlice = createSlice({
     extraReducers: {
         [fatchPosts.pending]: (state) => {
             state.posts.state = 'loading'
-        }
+        },
+        [fatchPosts.fulfilled]: (state, action) => {
+            state.posts.items = action.payload;
+            state.posts.status = 'loaded';
+        },
+        [fatchPosts.rejected]: (state) => {
+            state.posts.items = [];
+            state.posts.status = 'error';
+        },
     }
 })
 

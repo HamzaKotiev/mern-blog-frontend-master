@@ -1,5 +1,5 @@
 import React from 'react';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Grid from '@mui/material/Grid';
@@ -12,10 +12,15 @@ import { fatchPosts } from "../redux/slices/posts";
 
 export const Home = () => {
   const dispatch = useDispatch();
+  const { posts, tags} = useSelector(state => state.posts);
+
+  const isPostsLoading = posts.status === 'loading';
 
   React.useEffect(() => {
     dispatch(fatchPosts())
   },[])
+
+  console.log(posts);
   return (
     <>
       <Tabs style={{ marginBottom: 15 }} value={0} aria-label="basic tabs example">
@@ -24,7 +29,7 @@ export const Home = () => {
       </Tabs>
       <Grid container spacing={4}>
         <Grid xs={8} item>
-          {[...Array(5)].map(() => (
+          {(isPostsLoading ? [...Array(5)]: posts.items).map((obj, index) => (
             <Post
               id={1}
               title="Roast the code #1 | Rock Paper Scissors"
